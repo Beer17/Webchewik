@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto & Pre-registro · Grupo 2 Cheb Ik Mwuan (ANSI)</title>
+  <meta name="description" content="Comunícate con el Grupo 2 Palenque (Cheb Ik Mwuan) y el Clan Kawil. Inscripciones para Manada, Tropa, Comunidad, Clan y delegaciones visitantes.">
+  
+  <!-- Inyector Automático de Head, Estilos y Tipografías -->
+  <script src="../js/layout.js" data-base="sub"></script>
+</head>
+<body>
+
+  <!-- El Header (Pañoleta, Barra ANSI, Menú y Logo) se indexa automáticamente aquí -->
+  <div id="scout-header"></div>
+
+  <!-- ==========================================================================
+       ÁREA PARA DESARROLLAR: CONTACTO & PRE-REGISTRO
+       ========================================================================== -->
+  <main id="page-content" style="padding: 60px 0 90px; min-height: 70vh;">
+    <div class="container">
+      
+      <div class="section-header-center">
+        <div class="eyebrow-tag tag-light">Canales de Enlace</div>
+        <h1>Comunícate con el Grupo 2 Palenque</h1>
+        <p>
+          Estamos listos para orientarte. Ya sea que desees integrar a tu hijo o hija, unirte como rover o dirigente, o registrar a tu delegación scout para nuestros eventos.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: start;">
+        
+        <!-- Información Directa -->
+        <div style="background: #ffffff; border-radius: var(--radius-md); padding: 36px; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <h3 style="margin-bottom: 20px; font-size: 1.35rem; color: var(--maya-dark);">Información de Sede</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px;">
+            <div style="display: flex; gap: 14px; align-items: flex-start;">
+              <div style="width: 40px; height: 40px; border-radius: 8px; background: #eaf5f0; color: #145344; display: grid; place-items: center; font-size: 1.2rem; flex-shrink: 0;">📍</div>
+              <div>
+                <strong style="display: block; font-size: 0.95rem;">Ubicación de Reuniones:</strong>
+                <span style="font-size: 0.88rem; color: var(--text-muted);">Parques y áreas naturales de Palenque, Chiapas.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; align-items: flex-start;">
+              <div style="width: 40px; height: 40px; border-radius: 8px; background: #fef3c7; color: #b45309; display: grid; place-items: center; font-size: 1.2rem; flex-shrink: 0;">⏱</div>
+              <div>
+                <strong style="display: block; font-size: 0.95rem;">Horario Habitual:</strong>
+                <span style="font-size: 0.88rem; color: var(--text-muted);">Sábados de 09:30 a 13:00 h.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; align-items: flex-start;">
+              <div style="width: 40px; height: 40px; border-radius: 8px; background: #dbeafe; color: #1e40af; display: grid; place-items: center; font-size: 1.2rem; flex-shrink: 0;">✉</div>
+              <div>
+                <strong style="display: block; font-size: 0.95rem;">Correo Oficial:</strong>
+                <span style="font-size: 0.88rem; color: var(--text-muted);">contacto@grupo2chebikmwuan.org</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: #faf7f2; border-radius: 8px; padding: 20px; border-left: 4px solid var(--maya-gold);">
+            <strong style="display: block; font-size: 0.9rem; color: #0a241e; margin-bottom: 4px;">Asociación Nacional de Scouts Independientes:</strong>
+            <p style="font-size: 0.84rem; color: #536b63; margin: 0;">
+              El Grupo 2 Cheb Ik Mwuan opera con total apego a los estatutos, pólizas de protección recíproca y valores cívicos promovidos por la ANSI A.C. en toda la República Mexicana.
+            </p>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="contact-form-box" style="box-shadow: var(--shadow-md);">
+          <h3>Formulario de Contacto & Pre-registro</h3>
+          <p>Llena tus datos y un dirigente del Grupo 2 o del Clan Kawil se comunicará contigo.</p>
+
+          <form id="scoutContactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="inputName">Nombre Completo *</label>
+                <input type="text" id="inputName" class="form-control" placeholder="Ej. Carlos Ramos" required>
+              </div>
+              <div class="form-group">
+                <label for="inputPhone">Teléfono / WhatsApp *</label>
+                <input type="tel" id="inputPhone" class="form-control" placeholder="+52 916 ..." required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail">Correo Electrónico *</label>
+              <input type="email" id="inputEmail" class="form-control" placeholder="tu-correo@ejemplo.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="selectBranch">Motivo / Rama de Interés *</label>
+              <select id="selectBranch" class="form-control" required>
+                <option value="">Selecciona una opción...</option>
+                <option value="manada">Manada de Lobatos (7 - 10 años)</option>
+                <option value="tropa">Tropa Scout (10 - 15 años)</option>
+                <option value="comunidad">Comunidad de Caminantes (15 - 18 años)</option>
+                <option value="clan">Clan Kawil - Rovers (18 a 22+ años)</option>
+                <option value="encuentro">Pre-registro: Encuentro de Clanes Región Sur (Octubre 2026)</option>
+                <option value="dirigente">Voluntariado / Dirigente adulto</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="inputMsg">Mensaje o Pregunta</label>
+              <textarea id="inputMsg" class="form-control" rows="3" placeholder="Escribe aquí tu duda o información de tu grupo scout..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="width: 100%;">
+              Enviar Mensaje y Contactar ↗
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+  <!-- ==========================================================================
+       FIN DEL ÁREA PARA DESARROLLAR
+       ========================================================================== -->
+
+  <!-- El Footer y Toast se indexan automáticamente aquí -->
+  <div id="scout-footer"></div>
+
+</body>
+</html>
