@@ -2,7 +2,7 @@
 
 Sitio web oficial del **Grupo 2 Palenque (Grupo 2 Cheb Ik Mwuan)**, perteneciente a la **Asociación Nacional de Scouts Independientes, A.C. (ANSI)** y sede del **Clan Kawil**.
 
-![Insignia Oficial](assets/chebikmwuan_emblem.jpg)
+![Logotipo Oficial Grupo 2 Cheb Ik Mwuan](assets/logo.png)
 
 ---
 

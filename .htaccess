@@ -1,0 +1,67 @@
+# ==============================================================================
+# GRUPO 2 CHEB IK MWUAN · PALENQUE (ANSI)
+# Configuración de Servidor Apache (.htaccess)
+# ==============================================================================
+
+# 1. Habilitar el Motor de Reescritura
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # --------------------------------------------------------------------------
+    # Acceso directo al Logotipo Oficial
+    # Permite acceder al logo desde: /logo, /logo.png o /favicon.ico
+    # --------------------------------------------------------------------------
+    RewriteRule ^logo$ assets/logo.png [L,NC]
+    RewriteRule ^logo\.png$ assets/logo.png [L,NC]
+    RewriteRule ^favicon\.ico$ assets/logo.png [L,NC]
+
+    # Reescritura para URLs limpias (sin extensión .html)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.*)$ $1.html [L,QSA]
+</IfModule>
+
+# 2. Configuración de Tipos MIME
+<IfModule mod_mime.c>
+    AddType image/png .png
+    AddType image/jpeg .jpg .jpeg
+    AddType image/svg+xml .svg
+    AddType text/css .css
+    AddType application/javascript .js
+</IfModule>
+
+# 3. Encabezados de Caché y Rendimiento (Especial para el Logo e Imágenes)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    # Logo e imágenes en caché por 1 año
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+
+    # CSS y JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# 4. Control de Acceso y CORS para el Logotipo
+# Permite que el logo se previsualice correctamente en redes sociales (WhatsApp, Facebook, Twitter)
+<IfModule mod_headers.c>
+    <FilesMatch "(logo\.png|Logo%20grupo\.png|palenque_scout_camp\.jpg)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Cabeceras de Seguridad Básica
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# 5. Compresión Gzip / Deflate para carga rápida
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>

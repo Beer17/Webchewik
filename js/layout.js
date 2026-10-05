@@ -58,8 +58,8 @@
   if (!document.querySelector('link[rel="icon"]')) {
     const fav = document.createElement('link');
     fav.rel = 'icon';
-    fav.type = 'image/jpeg';
-    fav.href = `${base}assets/chebikmwuan_emblem.jpg`;
+    fav.type = 'image/png';
+    fav.href = `${base}assets/logo.png`;
     head.appendChild(fav);
   }
 
@@ -109,7 +109,7 @@
           <div class="container nav-wrap">
             <a href="${resolvePage('index.html')}" class="brand" aria-label="Grupo 2 Cheb Ik Mwuan">
               <div class="brand-logo-wrap">
-                <img src="${base}assets/chebikmwuan_emblem.jpg" alt="Insignia bordada Grupo 2 Cheb Ik Mwuan Palenque">
+                <img src="${base}assets/logo.png" alt="Logotipo Oficial Grupo 2 Cheb Ik Mwuan Palenque">
               </div>
               <div class="brand-text">
                 <h1>GRUPO 2 PALENQUE</h1>
