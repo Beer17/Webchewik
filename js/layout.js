@@ -6,13 +6,21 @@
  */
 
 (function () {
-  // Determinar la ruta relativa base según la ubicación de la página
+  // Determinar si estamos dentro de la subcarpeta 'pages/' o en la raíz
   const isInsidePagesDir = window.location.pathname.includes('/pages/') || 
                            window.location.pathname.endsWith('/pages') ||
-                           document.currentScript?.src.includes('/js/layout.js') && document.currentScript.getAttribute('data-base') === 'sub';
+                           (document.currentScript && document.currentScript.getAttribute('data-base') === 'sub');
   
   const base = isInsidePagesDir ? '../' : './';
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+  // Helper para resolver rutas a cualquier página del sitio
+  const resolvePage = (pageName) => {
+    if (pageName === 'index.html') {
+      return isInsidePagesDir ? '../index.html' : './index.html';
+    }
+    return isInsidePagesDir ? `./${pageName}` : `./pages/${pageName}`;
+  };
 
   // 1. Inyectar / Asegurar recursos en el <head>
   const head = document.head;
@@ -57,9 +65,9 @@
 
   // 2. Función para renderizar el Header y Footer compartidos
   document.addEventListener('DOMContentLoaded', () => {
-    // Si la página ya tiene header manual con la clase .site-header, no lo duplicamos
-    if (!document.querySelector('.site-header')) {
-      const headerContainer = document.getElementById('scout-header') || document.body;
+    // Renderizar Header
+    const headerContainer = document.getElementById('scout-header');
+    if (headerContainer || !document.querySelector('.site-header')) {
       const headerHTML = `
         <!-- Franja de los 4 colores de la Pañoleta -->
         <div class="panoleta-ribbon" title="Colores de la pañoleta: Rojo, Amarillo, Azul y Verde">
@@ -80,7 +88,7 @@
         <!-- Header y Navegación Principal -->
         <header class="site-header">
           <div class="container nav-wrap">
-            <a href="${base}index.html" class="brand" aria-label="Grupo 2 Cheb Ik Mwuan">
+            <a href="${resolvePage('index.html')}" class="brand" aria-label="Grupo 2 Cheb Ik Mwuan">
               <div class="brand-logo-wrap">
                 <img src="${base}assets/chebikmwuan_emblem.jpg" alt="Insignia bordada Grupo 2 Cheb Ik Mwuan Palenque">
               </div>
@@ -93,28 +101,28 @@
             <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">☰</button>
 
             <nav class="nav-links" aria-label="Navegación principal">
-              <a href="${base}index.html" class="${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">Inicio</a>
-              <a href="${base}pages/clan-kawil.html" class="${currentPath === 'clan-kawil.html' ? 'active' : ''}">Clan Kawil</a>
-              <a href="${base}pages/bitacora.html" class="${currentPath === 'bitacora.html' ? 'active' : ''}">Bitácora de Eventos</a>
-              <a href="${base}pages/logistica.html" class="${currentPath === 'logistica.html' ? 'active' : ''}">Centro Logístico</a>
-              <a href="${base}index.html#ramas">Secciones</a>
-              <a href="${base}index.html#hermandad">Hermandad</a>
-              <a href="${base}pages/contacto.html" class="nav-cta">Unirse al Grupo ↗</a>
+              <a href="${resolvePage('index.html')}" class="${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">Inicio</a>
+              <a href="${resolvePage('clan-kawil.html')}" class="${currentPath === 'clan-kawil.html' ? 'active' : ''}">Clan Kawil</a>
+              <a href="${resolvePage('bitacora.html')}" class="${currentPath === 'bitacora.html' ? 'active' : ''}">Bitácora de Eventos</a>
+              <a href="${resolvePage('logistica.html')}" class="${currentPath === 'logistica.html' ? 'active' : ''}">Centro Logístico</a>
+              <a href="${resolvePage('ramas.html')}" class="${currentPath === 'ramas.html' ? 'active' : ''}">Secciones</a>
+              <a href="${resolvePage('hermandad.html')}" class="${currentPath === 'hermandad.html' ? 'active' : ''}">Hermandad</a>
+              <a href="${resolvePage('contacto.html')}" class="nav-cta">Unirse al Grupo ↗</a>
             </nav>
           </div>
         </header>
       `;
 
-      if (document.getElementById('scout-header')) {
-        document.getElementById('scout-header').innerHTML = headerHTML;
-      } else {
+      if (headerContainer) {
+        headerContainer.innerHTML = headerHTML;
+      } else if (!document.querySelector('.site-header')) {
         document.body.insertAdjacentHTML('afterbegin', headerHTML);
       }
     }
 
-    // Si la página no tiene footer, inyectar el footer compartido
-    if (!document.querySelector('footer')) {
-      const footerContainer = document.getElementById('scout-footer') || document.body;
+    // Renderizar Footer compartido
+    const footerContainer = document.getElementById('scout-footer');
+    if (footerContainer || !document.querySelector('footer')) {
       const footerHTML = `
         <footer>
           <div class="container footer-grid">
@@ -134,30 +142,30 @@
             <div class="footer-col">
               <h5>Mística & Ramas</h5>
               <ul>
-                <li><a href="${base}index.html#identidad">La Pañoleta Cuatricolor</a></li>
-                <li><a href="${base}pages/clan-kawil.html">Clan Kawil (Rovers)</a></li>
-                <li><a href="${base}index.html#ramas">Manada & Tropa</a></li>
-                <li><a href="${base}index.html#ramas">Caminantes</a></li>
+                <li><a href="${resolvePage('index.html')}#identidad">La Pañoleta Cuatricolor</a></li>
+                <li><a href="${resolvePage('clan-kawil.html')}">Clan Kawil (Rovers)</a></li>
+                <li><a href="${resolvePage('ramas.html')}">Manada & Tropa</a></li>
+                <li><a href="${resolvePage('ramas.html')}">Caminantes</a></li>
               </ul>
             </div>
 
             <div class="footer-col">
               <h5>Actividades Clave</h5>
               <ul>
-                <li><a href="${base}pages/bitacora.html#oocotal">Campamento Oocotal (G1)</a></li>
-                <li><a href="${base}pages/bitacora.html#balseada">Balseada por la Paz</a></li>
-                <li><a href="${base}pages/bitacora.html#guacamayas">Vuelo de Guacamayas</a></li>
-                <li><a href="${base}pages/logistica.html#encuentro">Encuentro de Clanes 2026</a></li>
+                <li><a href="${resolvePage('bitacora.html')}#oocotal">Campamento Oocotal (G1)</a></li>
+                <li><a href="${resolvePage('bitacora.html')}#balseada">Balseada por la Paz</a></li>
+                <li><a href="${resolvePage('bitacora.html')}#guacamayas">Vuelo de Guacamayas</a></li>
+                <li><a href="${resolvePage('logistica.html')}#encuentro">Encuentro de Clanes 2026</a></li>
               </ul>
             </div>
 
             <div class="footer-col">
               <h5>Enlaces & Recursos</h5>
               <ul>
-                <li><a href="${base}pages/logistica.html">Plan de Comidas (3+2)</a></li>
-                <li><a href="${base}pages/logistica.html">Checklist de Equipo</a></li>
-                <li><a href="${base}index.html#hermandad">Grupos Hermanos</a></li>
-                <li><a href="${base}pages/contacto.html">Contacto y Pre-registro</a></li>
+                <li><a href="${resolvePage('logistica.html')}">Plan de Comidas (3+2)</a></li>
+                <li><a href="${resolvePage('logistica.html')}">Checklist de Equipo</a></li>
+                <li><a href="${resolvePage('hermandad.html')}">Grupos Hermanos</a></li>
+                <li><a href="${resolvePage('contacto.html')}">Contacto y Pre-registro</a></li>
               </ul>
             </div>
           </div>
@@ -179,14 +187,14 @@
         </div>
       `;
 
-      if (document.getElementById('scout-footer')) {
-        document.getElementById('scout-footer').innerHTML = footerHTML;
-      } else {
+      if (footerContainer) {
+        footerContainer.innerHTML = footerHTML;
+      } else if (!document.querySelector('footer')) {
         document.body.insertAdjacentHTML('beforeend', footerHTML);
       }
     }
 
-    // Inicializar eventos de navegación y menú hamburguesa
+    // Inicializar eventos de navegación y menú móvil
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     if (menuToggle && navLinks) {
