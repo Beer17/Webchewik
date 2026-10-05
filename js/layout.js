@@ -63,6 +63,25 @@
     head.appendChild(fav);
   }
 
+  // Vercel Web Analytics & Speed Insights
+  if (!document.getElementById('vercel-analytics')) {
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    const vaScript = document.createElement('script');
+    vaScript.id = 'vercel-analytics';
+    vaScript.defer = true;
+    vaScript.src = '/_vercel/insights/script.js';
+    head.appendChild(vaScript);
+  }
+
+  if (!document.getElementById('vercel-speed-insights')) {
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    const siScript = document.createElement('script');
+    siScript.id = 'vercel-speed-insights';
+    siScript.defer = true;
+    siScript.src = '/_vercel/speed-insights/script.js';
+    head.appendChild(siScript);
+  }
+
   // 2. Función para renderizar el Header y Footer compartidos
   document.addEventListener('DOMContentLoaded', () => {
     // Renderizar Header
